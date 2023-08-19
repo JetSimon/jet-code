@@ -2,19 +2,22 @@ import React from "react";
 import "./ProblemInfo.css";
 import ProblemExample from "./ProblemExample";
 
-function ProblemInfo() {
+function ProblemInfo(props) {
+
+    function getExamples(problem) {
+        return problem.examples.map((x) => 
+        <ProblemExample key={problem.examples.indexOf(x) + 1} number={problem.examples.indexOf(x) + 1} example={x}></ProblemExample>
+        );
+    }
+
     return (
         <div className="ProblemInfo">
-            <div class="ProblemContentHolder">
-                <h3>Problem Name</h3>
+            <div className="ProblemContentHolder">
+                <h3>{props.problem.problemName}</h3>
 
-                <div>This is a very common problem. Where you add two numbers a and b together.</div>
+                <div>{props.problem.description}</div>
 
-                <ProblemExample>
-                </ProblemExample>
-
-                <ProblemExample>
-                </ProblemExample>
+                {getExamples(props.problem)}
 
             </div>
         </div>

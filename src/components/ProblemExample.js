@@ -1,15 +1,15 @@
 import React from "react";
 import "./ProblemExample.css";
 
-function ProblemExample() {
+function ProblemExample(props) {
     return (
         <div className="ProblemExample">
         
-        <h4>Example X:</h4>
+        <h4>Example {props.number}:</h4>
         <div className="ProblemExampleBody">
-            <p><span>Input: </span>a = 1, b = 2</p>
-            <p><span>Output: </span>3</p>
-            <p><span>Explanation: <br></br></span>1 + 2 = 3</p>
+            <p><span>Input: </span>{props.example.input}</p>
+            <p><span>Output: </span>{props.example.output}</p>
+            <p><span>Explanation: <br></br></span>{props.example.explanation}</p>
         </div>
 
         </div>

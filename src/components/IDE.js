@@ -4,11 +4,11 @@ import "./IDE.css";
 import Editor from "./Editor.js";
 import Console from "./Console.js";
 
-function IDE() {
+function IDE(props) {
     return (
         <div className="IDE">
-            <Editor></Editor>
-            <Console></Console>
+            <Editor code={props.code} setCode={props.setCode}></Editor>
+            <Console terminalOutput={props.terminalOutput} onRun={props.onRun}></Console>
         </div>
     );
 }
