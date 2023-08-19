@@ -1,0 +1,45 @@
+.Editor {
+    text-align: left;
+    background-color: white;
+    display:flex;
+    border-radius: 10px;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    place-items: center;
+    padding: 1% 0%;
+    height:66%;
+    position: relative;
+}
+
+#editing {
+    resize: none;
+    z-index: 1;
+    color: transparent;
+    background: transparent;
+    caret-color: black; /* Or choose your favorite color */
+}
+
+#highlighting {
+    z-index: 0;
+}
+
+#editing, #highlighting {
+    /* Both elements need the same text and space styling so they are directly on top of each other */
+    margin: 10px;
+    padding: 10px;
+    border: 0;
+    width: 94%;
+    height: 90%;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+  
+#editing, #highlighting, #highlighting * {
+    /* Also add text styles to highlighting tokens */
+    font-size: 10pt;
+    font-family: monospace;
+    line-height: 15pt;
+}

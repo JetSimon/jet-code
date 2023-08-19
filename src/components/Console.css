@@ -1,0 +1,32 @@
+.Console {
+    text-align: left;
+    background-color: white;
+    display:flex;
+    border-radius: 10px;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    place-items: center;
+    padding: 1% 0%;
+    height:33%;
+    position: relative;
+}
+
+.ButtonHolder {
+    height:100%;
+    width: 33%;
+}
+
+.Terminal {
+    height:100%;
+    font-family: monospace;
+    width: 66%;
+    color: rgb(80, 176, 80);
+    border-radius: 10px;
+    background-color: rgb(28, 30, 29);
+    margin-right: 5px;
+}
+
+.Terminal div {
+    margin: 10px;
+}

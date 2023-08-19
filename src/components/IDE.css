@@ -1,0 +1,10 @@
+.IDE {
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 669px;
+    margin: 5%;
+    justify-content: center;
+    place-items: center;
+    gap: 25px;
+}

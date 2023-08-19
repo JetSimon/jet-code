@@ -1,0 +1,13 @@
+.ProblemExample {
+
+}
+
+.ProblemExampleBody {
+    font-family: monospace;
+    background-color: rgb(232, 232, 232);
+    padding: 3px 20px;
+}
+
+.ProblemContentHolder {
+    margin: 10px;
+}
