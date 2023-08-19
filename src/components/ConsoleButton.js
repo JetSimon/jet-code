@@ -3,7 +3,7 @@ import "./Console.css";
 
 function ConsoleButton(props) {
     return (
-        <button onClick={props.clickAction}>
+        <button className="button-4 ConsoleButton" onClick={props.clickAction}>
             {props.buttonLabel}
         </button>
     )

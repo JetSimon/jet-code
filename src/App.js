@@ -5,6 +5,10 @@ import './App.css';
 import ProblemInfo from './components/ProblemInfo.js';
 import IDE from './components/IDE.js';
 
+function errorString(e) {
+  return `<span style="color:red">${e}</span><br>`;
+}
+
 const testProblem = {
   problemName : "Addition",
   description : "This is a very common problem. Where you add two numbers a and b together.",
@@ -18,17 +22,17 @@ const testProblem = {
 
   tests : [
     {
-      "input" : [1, 2],
+      "input" : "[1, 2]",
       "expected" : 3,
     },
 
     {
-      "input" : [2, 2],
+      "input" : "[2, 2]",
       "expected" : 4,
     },
 
     {
-      "input" : [1, -1],
+      "input" : "[1, -1]",
       "expected" : 0,
     }
   ],
@@ -42,22 +46,22 @@ const testProblem = {
 function App() {
 
   let [problem] = useState(testProblem);
+  let [testcase, setTestCase] = useState(JSON.stringify(problem.tests[0]));
 
   let [terminalOutput, setTerminalOutput] = useState("Welcome to JetCode\n>");
   let [code, setCode] = useState(() => {
     return problem.driver.toString().replace("function", "driver = function").replace("{", "{\n\n");
   });
 
-  function onRun() {
+  function onRunTestcase() {
 
-    let driver = problem.driver;
-
-    // First try and set the driver
-    try {
+    let driver = null;
+     // First try and set the driver
+     try {
       eval(code);
     } 
     catch(e) {
-      setTerminalOutput(e.toString());
+      setTerminalOutput(errorString(e));
       return;
     }
 
@@ -74,13 +78,72 @@ function App() {
 
     // This is the eval per function
     let output = "";
+
+      let testCode = "driver(";
+      let testcaseObject = JSON.parse(testcase);
+      let inputs = eval(testcaseObject.input);
+      for(let j = 0; j < inputs.length; j++) {
+        testCode += inputs[j];
+        if(j < inputs.length - 1) {
+          testCode += ", "
+        }
+      }
+
+      testCode += ");"
+
+      try {
+        let res = eval(testCode);
+
+        if(res !== testcaseObject.expected) {
+          throw Error(`For input ${testcaseObject.input} got ${res} but expected ${testcaseObject.expected}!`)
+        }
+        else {
+          console.log(`Passed case!`);
+        }
+      } 
+      catch(e) {
+        output += errorString(e);
+      }
+
+      setTerminalOutput(output.toString());
+    console.log = console.oldLog;
+  }
+
+  function onRun() {
+
+    let driver = null;
+
+    // First try and set the driver
+    try {
+      eval(code);
+    } 
+    catch(e) {
+      setTerminalOutput(errorString(e));
+      return;
+    }
+
+    console.oldLog = console.log;
+    console.log = function(...args)
+    {
+        console.oldLog(...args);
+        for (let i = 0; i < arguments.length; i++) {
+          const arg = arguments[i];
+          output += arg.toString() + " ";
+        }
+        output += "<br>";
+    };
+
+    // This is the eval per function
+    let output = "";
+    let anyFailures = false;
     
     for(let i = 0; i < problem.tests.length; i++) {
       const test = problem.tests[i];
-      let testCode = "driver("
-      for(let j = 0; j < test.input.length; j++) {
-        testCode += test.input[j];
-        if(j < test.input.length - 1) {
+      let testCode = "driver(";
+      let inputs = eval(test.input);
+      for(let j = 0; j < inputs.length; j++) {
+        testCode += inputs[j];
+        if(j < inputs.length - 1) {
           testCode += ", "
         }
       }
@@ -92,7 +155,8 @@ function App() {
         //console.log("input:",test.input,"res:",res,"expected:",test.expected)
         
         if(res !== test.expected) {
-          throw Error(`Case ${i+1}: For input [${test.input}] got ${res} but expected ${test.expected}!`)
+          anyFailures = true;
+          throw Error(`Case ${i+1}: For input ${test.input} got ${res} but expected ${test.expected}!`)
         }
         else {
           console.log(`Passed case ${i+1}!`);
@@ -103,9 +167,16 @@ function App() {
         }*/
       } 
       catch(e) {
-        output += e + "<br>";
+        output += errorString(e);
       }
 
+    }
+
+    if(!anyFailures) {
+      output += "All test cases passed! Problem solved.<br>";
+    }
+    else {
+      output += errorString("One or more test cases failed. Problem still unsolved.");
     }
 
     setTerminalOutput(output.toString());
@@ -117,7 +188,7 @@ function App() {
       <header className="App-header">jetcode</header>
       <div className="App-content">
         <ProblemInfo problem={problem}></ProblemInfo>
-        <IDE terminalOutput={terminalOutput} onRun={onRun} code={code} setCode={setCode}></IDE></div>
+        <IDE onRunTestcase={onRunTestcase} testcase={testcase} setTestCase={setTestCase} terminalOutput={terminalOutput} onRun={onRun} code={code} setCode={setCode}></IDE></div>
     </div>
   );
 }

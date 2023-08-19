@@ -8,7 +8,7 @@ function IDE(props) {
     return (
         <div className="IDE">
             <Editor code={props.code} setCode={props.setCode}></Editor>
-            <Console terminalOutput={props.terminalOutput} onRun={props.onRun}></Console>
+            <Console onRunTestcase={props.onRunTestcase} testcase={props.testcase} setTestCase={props.setTestCase}  terminalOutput={props.terminalOutput} onRun={props.onRun}></Console>
         </div>
     );
 }

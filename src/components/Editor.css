@@ -14,6 +14,7 @@
 }
 
 #editing {
+    outline: none;
     resize: none;
     z-index: 1;
     color: transparent;
@@ -22,6 +23,9 @@
 }
 
 #highlighting {
+    outline-style: solid;
+    outline-width: 1px;
+    color: darkgray;
     z-index: 0;
 }
 

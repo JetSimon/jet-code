@@ -10,7 +10,7 @@ function Editor(props) {
     const code = props.code;
 
     function onKeyDown(e) {
-        if(e.key == "Tab") {
+        if(e.key === "Tab") {
             e.preventDefault();
             let val = e.target.value;
             let oldStart = e.target.selectionStart;
