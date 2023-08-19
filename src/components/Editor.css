@@ -10,6 +10,7 @@
     padding: 1% 0%;
     height:66%;
     position: relative;
+    max-width: 800px;
 }
 
 #editing {
@@ -29,7 +30,7 @@
     margin: 10px;
     padding: 10px;
     border: 0;
-    width: 94%;
+    width: calc(100% - 40px);
     height: 90%;
     border-radius: 5px;
     position: absolute;

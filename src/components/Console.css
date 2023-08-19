@@ -10,6 +10,7 @@
     padding: 1% 0%;
     height:33%;
     position: relative;
+    max-width: 1000px;
 }
 
 .ButtonHolder {
@@ -18,18 +19,33 @@
     justify-content: top;
     place-items: center;
     height:100%;
-    width: 33%;
+    width: 25%;
 }
 
 .Terminal {
+    margin-left:5px;
     height:100%;
     font-family: monospace;
-    width: 66%;
+    width: 75%;
     color: rgb(80, 176, 80);
     border-radius: 10px;
     background-color: rgb(28, 30, 29);
     margin-right: 5px;
+    overflow-y: auto;
 }
+
+/*
+// Hide scrollbar for Chrome, Safari and Opera
+.Terminal::-webkit-scrollbar {
+    display: none;
+}
+  
+// Hide scrollbar for IE, Edge and Firefox
+.Terminal {
+-ms-overflow-style: none;  //IE and Edge
+scrollbar-width: none;  // Firefox
+}
+*/
 
 .Terminal div {
     margin: 10px;

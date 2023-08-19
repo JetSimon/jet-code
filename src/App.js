@@ -114,8 +114,10 @@ function App() {
 
   return (
     <div className="App">
-      <ProblemInfo problem={problem}></ProblemInfo>
-      <IDE terminalOutput={terminalOutput} onRun={onRun} code={code} setCode={setCode}></IDE>
+      <header className="App-header">jetcode</header>
+      <div className="App-content">
+        <ProblemInfo problem={problem}></ProblemInfo>
+        <IDE terminalOutput={terminalOutput} onRun={onRun} code={code} setCode={setCode}></IDE></div>
     </div>
   );
 }
